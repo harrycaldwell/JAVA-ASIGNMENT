@@ -5,6 +5,7 @@
 // the game), and runs a background process (a 'thread') that moves the ball 
 // every 20 milliseconds and checks for collisions 
 
+import java.util.Random; //Adding in the randomizer for the colour randomizer
 import javafx.scene.paint.*;
 import javafx.application.Platform;
 
@@ -94,11 +95,14 @@ public class Model
         // **************************************************************
         int WALL_TOP = 100;                     // how far down the screen the wall starts
         int NUM_BRICKS = width/BRICK_WIDTH;     // how many bricks fit on screen
-        int NUM_ROWS = 3;                       // how many rows of bricks to create
+        int NUM_ROWS = 3; // how many rows of bricks to create
+        Color[] possibleColors = {Color.BLUE, Color.RED, Color.GREEN, Color.YELLOW, Color.ORANGE}; // array of possible colors
         bricks = new GameObj[NUM_BRICKS* NUM_ROWS];       // make an array big enough for all the bricks
+        Random random = new Random();//This creates a new random object so that the random number can be generated
         for (int j = 0; j < NUM_ROWS; j++) {
          for (int i=0; i < NUM_BRICKS; i++) {
-            GameObj brick = new GameObj(BRICK_WIDTH * i, WALL_TOP + j * (BRICK_HEIGHT + 5), BRICK_WIDTH, BRICK_HEIGHT, Color.BLUE);
+            int colorIndex = random.nextInt(possibleColors.length); // generate a random number between 0 and the length of the possibleColors array
+            GameObj brick = new GameObj(BRICK_WIDTH * i, WALL_TOP + j * (BRICK_HEIGHT + 5), BRICK_WIDTH, BRICK_HEIGHT, possibleColors[colorIndex]); // use the random number to select a color from the possibleColors array
             bricks[j * NUM_BRICKS + i] = brick;      // add this brick to the list of bricks
          }
         }
