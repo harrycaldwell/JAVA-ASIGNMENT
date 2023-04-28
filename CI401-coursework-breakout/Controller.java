@@ -25,7 +25,7 @@ public class Controller
   public void userKeyInteraction(KeyEvent event )
   {
     // print a debugging message to show a key has been pressed
-    Debug.trace("Controller::userKeyInteraction: keyCode = " + event.getCode() );
+    //Debug.trace("Controller::userKeyInteraction: keyCode = " + event.getCode() );
     
     // KeyEvent objects have a method getCode which tells us which key has been pressed.
     // KeyEvent also provides variables LEFT, RIGHT, F, N, S (etc) which are the codes
@@ -36,10 +36,10 @@ public class Controller
       case LEFT:                     // Left Arrow
         model.moveBat( -1);          // move bat left
         break;
-      case RIGHT:                    // Right arrow
+      case RIGHT:// Right arrow
         model.moveBat( +1 );         // Move bat right
         break;
-      case D:                        // D key
+      case D:// D key
         model.moveBat( +1 );         // Move bat right
         break;
       case A:                        // A Key
@@ -58,5 +58,6 @@ public class Controller
         model.setGameState("finished");
         break;
     }
-  }
+    }
+    
 }

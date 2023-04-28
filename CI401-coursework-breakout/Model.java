@@ -174,8 +174,15 @@ public class Model
         if ( ball.hitBy(bat) ) {
             ball.changeDirectionY();
         }
+        
+        if (ball.hitByX(bat)){
+            Debug.trace("BAT Current top =" + bat.getX() + " " + bat.getY());
+            Debug.trace("BALL Current top =" + ball.getX() + " " + ball.getY());
+            ball.changeDirectionX();
+        }
     }
-
+    
+    
     // This is how the Model talks to the View
     // Whenever the Model changes, this method calls the update method in
     // the View. It needs to run in the JavaFX event thread, and Platform.runLater 
@@ -246,11 +253,17 @@ public class Model
     }
     
     // move the bat one step - -1 is left, +1 is right
+    //checks to make sure the bat does not go out of bounds
     public synchronized void moveBat( int direction )
     {        
         int dist = direction * BAT_MOVE;    // Actual distance to move
-        Debug.trace( "Model::moveBat: Move bat = " + dist );
+        //Debug.trace( "Model::moveBat: Move bat = " + dist );
+        if (bat.getX() + dist > 450 || bat.getX() + dist < 0){
+            //Debug.trace("Current topX =" + bat.getX());
+            dist = 0;
+        }
         bat.moveX(dist);
     }
+    
 }   
     

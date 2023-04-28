@@ -52,7 +52,17 @@ public class GameObj
     {
         dirY = -dirY;
     }
-
+    
+    // Returns the Value of X
+    public int getX(){
+        return topX;
+    }
+    
+    //Returns the Value of Y
+    public int getY(){
+        return topY;
+    }
+    
     // Detect collision between this object and the argument object
     // It's easiest to work out if they do NOT overlap, and then
     // return the opposite
@@ -63,10 +73,23 @@ public class GameObj
             topX+width <= obj.topX         ||
             topY >= obj.topY+obj.height    ||
             topY+height <= obj.topY ;
-        
+            
         // use ! to return the opposite result - hitBy is 'not separate')
+        
         return(! separate);  
           
+    }
+    
+    public boolean hitByX( GameObj obj){
+        boolean separate = true;
+        if( topY >= 725){
+            separate =  
+                this.topX + 2 == obj.topX - obj.width    ||    // '||' means 'or'
+                this.topX - this.width >= obj.topX + 2;
+            
+        // use ! to return the opposite result - hitBy is 'not separate')
+        }
+        return(! separate);
     }
 
 }
