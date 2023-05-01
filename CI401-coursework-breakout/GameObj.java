@@ -6,6 +6,7 @@
 
 // import Athe JavaFX Color class
 import javafx.scene.paint.Color;
+import java.lang.Math.*;
 
 public class GameObj
 {
@@ -76,20 +77,28 @@ public class GameObj
             
         // use ! to return the opposite result - hitBy is 'not separate')
         
-        return(! separate);  
+        return( ! separate);  
           
     }
     
     public boolean hitByX( GameObj obj){
-        boolean separate = true;
-        if( topY >= 725){
-            separate =  
-                this.topX + 2 == obj.topX - obj.width    ||    // '||' means 'or'
-                this.topX - this.width >= obj.topX + 2;
+        int newTopX = topX;
+        int newObjTopX = obj.topX;
+        boolean separate =  
+            newTopX >= newObjTopX+obj.width     ||    // '||' means 'or'
+            newTopX+width <= newObjTopX        ||
+            topY >= obj.topY+obj.height    ||
+            topY+height <= obj.topY ;
             
+            if(!separate){
+                if (topY == 727){
+                    
+                }
+                else if (Math.abs(topY - obj.topY) <= 29){
+                    return true;
+                }
+            }
         // use ! to return the opposite result - hitBy is 'not separate')
+        return false;
         }
-        return(! separate);
     }
-
-}

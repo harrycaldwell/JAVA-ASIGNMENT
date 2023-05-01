@@ -8,7 +8,6 @@
 import java.util.Random; //Adding in the randomizer for the colour randomizer
 import javafx.scene.paint.*;
 import javafx.application.Platform;
-
 public class Model 
 {
     // First,a collection of useful values for calculating sizes and layouts etc.
@@ -170,15 +169,15 @@ public class Model
             ball.changeDirectionY();
         }
         
-        // check whether ball has hit the bat
-        if ( ball.hitBy(bat) ) {
-            ball.changeDirectionY();
-        }
-        
         if (ball.hitByX(bat)){
             Debug.trace("BAT Current top =" + bat.getX() + " " + bat.getY());
             Debug.trace("BALL Current top =" + ball.getX() + " " + ball.getY());
             ball.changeDirectionX();
+        }
+        
+        // check whether ball has hit the bat
+        if ( ball.hitBy(bat) ) {
+            ball.changeDirectionY();
         }
     }
     
