@@ -33,6 +33,7 @@ public class View implements EventHandler<KeyEvent>
     public GameObj   ball;           // The ball
     public GameObj[] bricks;         // The bricks
     public int       score =  0;     // The score
+    public int       lives = 3;      // Lives
    
     // constructor method - we get told the width and height of the window
     public View(int w, int h)
@@ -63,10 +64,11 @@ public class View implements EventHandler<KeyEvent>
         
         // infoText box for the score - a label which we position in front of
         // the canvas (by adding it to the pane after the canvas)
-        infoText = new Label("BreakOut: Score = " + score);
+        infoText = new Label("BreakOut: Score = " + score + "Lives: " + lives);
         infoText.setTranslateX(50);  // these commands setthe position of the text box
         infoText.setTranslateY(10);  // (measuring from the top left corner)
         pane.getChildren().add(infoText);  // add label to the pane
+        
 
         // Make a new JavaFX Scene, containing the complete GUI
         Scene scene = new Scene(pane);   
@@ -120,7 +122,7 @@ public class View implements EventHandler<KeyEvent>
             }  
             
             // update the score
-            infoText.setText("BreakOut: Score = " + score);
+            infoText.setText("BreakOut: Score = " + score + " Lives = " + lives);
         }
     }
 
@@ -141,6 +143,7 @@ public class View implements EventHandler<KeyEvent>
         bricks  = model.getBricks();            // Bricks
         bat     = model.getBat();               // Bat
         score   = model.getScore();             // Score
+        lives   = model.getLives();             // Lives
         //Debug.trace("Update");
         drawPicture();                     // Re draw game
     }

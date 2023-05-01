@@ -35,6 +35,7 @@ public class Model
     public GameObj[] bricks;            // The bricks
     public GameObj bat;                 // The bat
     public int score = 0;               // The score
+    public int lives = 3;               //Lives
 
     // variables that control the game 
     public String gameState = "running";// Set to "finished" to end the game
@@ -143,7 +144,16 @@ public class Model
         if (x <= 0 + B)  ball.changeDirectionX();
         if (y >= height - B - BALL_SIZE)  // Bottom
         { 
-            ball.changeDirectionY(); 
+            //ball.changeDirectionY();
+            if (getLives() > 0){
+                updateLives();
+                ball.topX = width/2;
+                ball.topY = height/2;
+                if (ball.dirY < 0){
+                    ball.dirY = -ball.dirY;
+                }
+            else if (getLives() == 0) setGameState("finished");
+            }
             addToScore( HIT_BOTTOM );     // score penalty for hitting the bottom of the screen
         }
         if (y <= 0 + M)  ball.changeDirectionY();
@@ -251,6 +261,14 @@ public class Model
         score += n;        
     }
     
+    //resturn lives
+    public synchronized int getLives(){
+        return lives;
+    }
+    
+    public synchronized void updateLives(){
+        lives--;
+    }
     // move the bat one step - -1 is left, +1 is right
     //checks to make sure the bat does not go out of bounds
     public synchronized void moveBat( int direction )
