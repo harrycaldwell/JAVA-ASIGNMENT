@@ -144,15 +144,15 @@ public class Model
         if (x <= 0 + B)  ball.changeDirectionX();
         if (y >= height - B - BALL_SIZE)  // Bottom
         { 
-            //ball.changeDirectionY();
+            //Resets ball if hits bottom
             if (getLives() > 0){
-                updateLives();
+                updateLives(); //Updates lives counter
                 ball.topX = width/2;
                 ball.topY = height/2;
                 if (ball.dirY < 0){
-                    ball.dirY = -ball.dirY;
+                    ball.dirY = -ball.dirY; //Makes the ball go to bat on reset
                 }
-            else if (getLives() == 0) setGameState("finished");
+            else if (getLives() == 0) setGameState("finished"); // Ends game if lives = 0
             }
             addToScore( HIT_BOTTOM );     // score penalty for hitting the bottom of the screen
         }
@@ -261,11 +261,11 @@ public class Model
         score += n;        
     }
     
-    //resturn lives
+    //return lives
     public synchronized int getLives(){
         return lives;
     }
-    
+    // Upon update reduces lives by one
     public synchronized void updateLives(){
         lives--;
     }
