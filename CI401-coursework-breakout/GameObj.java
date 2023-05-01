@@ -82,17 +82,15 @@ public class GameObj
     }
     
     public boolean hitByX( GameObj obj){
-        int newTopX = topX;
-        int newObjTopX = obj.topX;
         boolean separate =  
-            newTopX >= newObjTopX+obj.width     ||    // '||' means 'or'
-            newTopX+width <= newObjTopX        ||
+            topX >= obj.topX+obj.width     ||    // '||' means 'or'
+            topX+width <= obj.topX        ||
             topY >= obj.topY+obj.height    ||
             topY+height <= obj.topY ;
             
             if(!separate){
                 if (topY == 727){
-                    
+                    return false;
                 }
                 else if (Math.abs(topY - obj.topY) <= 29){
                     return true;
